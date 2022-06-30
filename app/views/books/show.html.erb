@@ -1,0 +1,57 @@
+
+ <div>
+   <% if @book.errors.any? %>
+
+      <h2><%= pluralize(@book.errors.count, "error") %> prohibited this obj from being saved:</h2>
+      <div id="error_explanation" class="alert alert-danger">
+      <ul>
+        <% @book.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+      </div>
+   <% end %>
+</div>
+
+<main>
+ <p id="notice"></p>
+  <div class="container">
+   <div class="row">
+    <div class="col-md-3">
+
+     <%= render 'profile', book: @book, user: @user %>
+
+      <div class="col-md-8 offset-md-1">
+
+          <h2>Book  detail</h2>
+
+          <table class="table">
+            <tr>
+             <td>
+               <%= image_tag @books.user.get_profile_image(100,100) %>
+               <%= @books.user.name %>
+             </td>
+            </tr>
+            <tr>
+             <td>Title</td>
+             <td>Opinion</td>
+            </tr>
+            <tr>
+             <td><%= link_to @books.title,book_path(@books.id) %></td>
+             <td><%= @books.body %></td>
+            </tr>
+          </table>
+      </div>
+    </div>
+   </div>
+  </div>
+</main>
+
+<footer>
+      <div class="container mt-5">
+        <div class="row">
+          <div class="mx-auto">
+            <p>CopyRight Infratop.inc</p>
+          </div>
+        </div>
+</footer>
