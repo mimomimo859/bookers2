@@ -1,5 +1,7 @@
+<main>
 
- <div>
+<div class="container px-5 px-sm-0">
+
    <% if @book.errors.any? %>
 
       <h2><%= pluralize(@book.errors.count, "error") %> prohibited this obj from being saved:</h2>
@@ -11,13 +13,7 @@
       </ul>
       </div>
    <% end %>
-</div>
 
-<main>
- <p id="notice"></p>
-  <div class="container">
-   <div class="row">
-    <div class="col-md-3">
 
      <%= render 'profile', book: @book, user: @user %>
 
@@ -26,23 +22,24 @@
           <h2>Book  detail</h2>
 
           <table class="table">
+            <tbody>
             <tr>
              <td>
-               <%= image_tag @books.user.get_profile_image(100,100) %>
-               <%= @books.user.name %>
+               <%= link_to user_path(@user) do %>
+               <%= image_tag @book_id.user.get_profile_image(100,100) %><br>
+               <%= @book_id.user.name %>
+               <% end %>
              </td>
+             <td><%= link_to @book_id.title, book_path(@book_id) %></td>
+             <td><%= @book_id.body %></td>
+             <% if @book_id.user==current_user %>
+             <td><%= link_to "Edit", edit_book_path(@book_id), class: "btn btn-sm btn-success" %></td>
+             <td><%= link_to "Destroy", book_path(@book_id), method: :delete, class: "btn btn-sm btn-danger", "data-confirm"=>"本当に消しますか？" %>
+             <% end %>
             </tr>
-            <tr>
-             <td>Title</td>
-             <td>Opinion</td>
-            </tr>
-            <tr>
-             <td><%= link_to @books.title,book_path(@books.id) %></td>
-             <td><%= @books.body %></td>
-            </tr>
+            </tbody>
           </table>
-      </div>
-    </div>
+
    </div>
   </div>
 </main>
